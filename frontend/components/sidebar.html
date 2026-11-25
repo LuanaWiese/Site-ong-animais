@@ -1,0 +1,35 @@
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <i class="fa-solid fa-paw"></i>
+        <h2>Grupo de Resgates</h2>
+    </div>
+    <div class="sidebar-user">
+        <div class="user-avatar">
+            <i class="fa-solid fa-circle-user"></i>
+        </div>
+        <div class="user-details">
+            <span class="user-name" id="logged-user-name">Administrador</span>
+            <span class="user-role">Painel Admin</span>
+        </div>
+    </div>
+    <nav class="sidebar-menu">
+        <a href="#" onclick="showPanel('dashboard')" class="menu-item active" id="menu-dashboard">
+            <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+        <a href="#" onclick="showPanel('animals')" class="menu-item" id="menu-animals">
+            <i class="fa-solid fa-dog"></i> Animais
+        </a>
+        <a href="#" onclick="showPanel('especies')" class="menu-item" id="menu-especies">
+            <i class="fa-solid fa-tags"></i> Espécies
+        </a>
+        <a href="#" onclick="showPanel('racas')" class="menu-item" id="menu-racas">
+            <i class="fa-solid fa-dna"></i> Raças
+        </a>
+        <a href="#" onclick="showPanel('usuarios')" class="menu-item" id="menu-usuarios">
+            <i class="fa-solid fa-users"></i> Usuários
+        </a>
+        <a href="#" onclick="logout()" class="menu-item menu-logout">
+            <i class="fa-solid fa-right-from-bracket"></i> Sair
+        </a>
+    </nav>
+</aside>

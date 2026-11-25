@@ -1,0 +1,128 @@
+/* index.css - Home page specific styles */
+
+.highlight {
+    color: var(--primary);
+    position: relative;
+}
+
+/* Steps Grid */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.step-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    position: relative;
+}
+
+.step-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+}
+
+.step-num {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+}
+
+.step-icon {
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+    display: block;
+}
+
+.step-card h4 {
+    margin-bottom: 10px;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '\f1b0';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 200px;
+    color: rgba(255,255,255,0.06);
+    pointer-events: none;
+}
+
+.cta-content {
+    text-align: center;
+    color: white;
+}
+
+.cta-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+.cta-content h2 {
+    color: white;
+    margin-bottom: 14px;
+}
+
+.cta-content p {
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 32px;
+    font-size: 1.05rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn-primary {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.cta-buttons .btn-primary:hover {
+    background: var(--bg-alt);
+}
+
+@media (max-width: 900px) {
+    .steps-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+    .steps-grid { grid-template-columns: 1fr; }
+}

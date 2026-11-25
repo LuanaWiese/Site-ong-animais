@@ -1,0 +1,17 @@
+<div class="animal-card" data-id="${id}">
+    <div class="card-image">
+        <img src="${foto}" alt="${nome}" class="pet-photo">
+        <span class="card-status status-${statusClass}">${status}</span>
+    </div>
+    <div class="card-content">
+        <h3 class="pet-name">${nome}</h3>
+        <div class="card-badges">
+            <span class="badge sexo-${sexoClass}"><i class="fa-solid fa-venus-mars"></i> ${sexo}</span>
+            <span class="badge size-${porteClass}"><i class="fa-solid fa-arrows-up-down-left-right"></i> ${porte}</span>
+            <span class="badge age"><i class="fa-solid fa-calendar"></i> ${idade} ${idadeLabel}</span>
+        </div>
+        <p class="card-breed"><strong>Espécie:</strong> ${especie} | <strong>Raça:</strong> ${raca}</p>
+        <p class="card-description">${descricao}</p>
+        <button class="btn btn-primary btn-block btn-adopt" onclick="openAdoptModal(${id})">Adotar</button>
+    </div>
+</div>

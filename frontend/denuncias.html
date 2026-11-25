@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denunciar Maus-Tratos – Grupo de Resgates</title>
+    <meta name="description" content="Registre uma denúncia de maus-tratos ou abandono de animais junto ao Grupo de Resgates. Atendimento sigiloso e opção de denúncia anônima.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/denuncias.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="section-label">Proteção Animal</span>
+            <h1>Denuncie Maus-Tratos</h1>
+            <p>Sua denúncia pode salvar uma vida. Informe os detalhes abaixo para que nossa equipe do Grupo de Resgates avalie e tome as providências necessárias.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="report-layout">
+                <!-- Info Panel -->
+                <aside class="report-info">
+                    <h3>Canal de Denúncias</h3>
+                    <p>Maus-tratos contra animais é crime previsto em lei (Lei nº 9.605/98 e Lei nº 14.064/20). Todas as informações enviadas são tratadas com sigilo.</p>
+
+                    <div class="report-items">
+                        <div class="report-item">
+                            <div class="report-icon">
+                                <i class="fa-solid fa-user-secret"></i>
+                            </div>
+                            <div>
+                                <strong>Sigilo Garantido</strong>
+                                <span>Você pode optar pela denúncia totalmente anônima sem informar nome ou contato.</span>
+                            </div>
+                        </div>
+                        <div class="report-item">
+                            <div class="report-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <strong>Localização Precisa</strong>
+                                <span>Informe rua, número aproximado e pontos de referência para agilizar a verificação.</span>
+                            </div>
+                        </div>
+                        <div class="report-item">
+                            <div class="report-icon">
+                                <i class="fa-solid fa-camera"></i>
+                            </div>
+                            <div>
+                                <strong>Fotos e Evidências</strong>
+                                <span>Se possível e seguro, anexe uma foto que ajude a identificar a situação do animal.</span>
+                            </div>
+                        </div>
+                        <div class="report-item">
+                            <div class="report-icon">
+                                <i class="fa-solid fa-phone-volume"></i>
+                            </div>
+                            <div>
+                                <strong>Risco Imediato</strong>
+                                <span>Em casos de flagrante ou risco extremo, acione também a Polícia Militar (<strong>190</strong>).</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Report Form Card -->
+                <div class="report-form-card" id="report-form-card">
+                    <h3>Registrar Denúncia</h3>
+                    <p>Preencha os campos com o máximo de informações possíveis sobre a ocorrência.</p>
+
+                    <form id="denuncia-form" class="denuncia-form" enctype="multipart/form-data" novalidate>
+                        <div class="anonymous-toggle">
+                            <label class="checkbox-label" for="denuncia-anonima">
+                                <input type="checkbox" id="denuncia-anonima" name="anonima">
+                                <span>
+                                    <strong>Fazer denúncia anônima</strong>
+                                    <small>Seus dados pessoais não serão solicitados nem registrados.</small>
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="form-row" id="identificacao-fields">
+                            <div class="form-group">
+                                <label for="denuncia-nome">Seu Nome (opcional)</label>
+                                <input type="text" id="denuncia-nome" name="denunciante_nome" placeholder="Seu nome completo">
+                            </div>
+                            <div class="form-group">
+                                <label for="denuncia-contato">Telefone ou E-mail (opcional)</label>
+                                <input type="text" id="denuncia-contato" name="denunciante_contato" placeholder="(00) 00000-0000 ou seu@email.com">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="denuncia-tipo">Tipo de Maus-Tratos *</label>
+                                <select id="denuncia-tipo" name="tipo_maus_tratos" required>
+                                    <option value="">Selecione a situação</option>
+                                    <option value="Abandono">Abandono</option>
+                                    <option value="Agressão Física">Agressão Física</option>
+                                    <option value="Falta de Alimentação ou Água">Falta de Alimentação ou Água</option>
+                                    <option value="Ambiente Insalubre / Confinamento">Ambiente Insalubre / Confinamento</option>
+                                    <option value="Negligência Veterinária">Negligência Veterinária</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                                <span class="field-error" id="error-tipo"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="denuncia-especie">Animal / Espécie *</label>
+                                <select id="denuncia-especie" name="especie_animal" required>
+                                    <option value="">Selecione o animal</option>
+                                    <option value="Cachorro">Cachorro</option>
+                                    <option value="Gato">Gato</option>
+                                    <option value="Cavalo / Equino">Cavalo / Equino</option>
+                                    <option value="Ave">Ave</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                                <span class="field-error" id="error-especie"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="denuncia-endereco">Endereço / Ponto de Referência *</label>
+                                <input type="text" id="denuncia-endereco" name="endereco" placeholder="Rua, número e ponto de referência" required>
+                                <span class="field-error" id="error-endereco"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="denuncia-bairro-cidade">Bairro / Cidade *</label>
+                                <input type="text" id="denuncia-bairro-cidade" name="bairro_cidade" placeholder="Ex: Centro - São Paulo/SP" required>
+                                <span class="field-error" id="error-bairro-cidade"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="denuncia-data">Data Aproximada da Ocorrência</label>
+                                <input type="date" id="denuncia-data" name="data_ocorrencia">
+                            </div>
+                            <div class="form-group">
+                                <label for="denuncia-foto">Foto / Evidência (opcional)</label>
+                                <input type="file" id="denuncia-foto" name="foto" accept="image/jpeg,image/png,image/webp">
+                                <small class="field-hint">JPG, PNG ou WebP (máx. 5MB)</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="denuncia-descricao">Descrição Detalhada dos Fatos *</label>
+                            <textarea id="denuncia-descricao" name="descricao" rows="5" placeholder="Descreva o que está acontecendo, quantos animais há no local, frequência da situação e outras informações relevantes..." required></textarea>
+                            <span class="field-error" id="error-descricao"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" id="denuncia-submit">
+                            <i class="fa-solid fa-paper-plane"></i> Enviar Denúncia
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    <div id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="js/services/api.js"></script>
+    <script src="js/services/denunciaService.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/denuncias.js"></script>
+</body>
+</html>

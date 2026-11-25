@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo – Grupo de Resgates</title>
+    <meta name="description" content="Painel administrativo do Grupo de Resgates. Gerencie animais, espécies, raças, denúncias e usuários.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-paw"></i>
+                <h2>Grupo de Resgates</h2>
+            </div>
+            <div class="sidebar-user">
+                <div class="user-avatar"><i class="fa-solid fa-circle-user"></i></div>
+                <div class="user-details">
+                    <span class="user-name" id="logged-user-name">Administrador</span>
+                    <span class="user-role">Painel Admin</span>
+                </div>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="#" onclick="showPanel('dashboard')" class="menu-item active" id="menu-dashboard">
+                    <i class="fa-solid fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#" onclick="showPanel('animals')" class="menu-item" id="menu-animals">
+                    <i class="fa-solid fa-paw"></i> Animais
+                </a>
+                <a href="#" onclick="showPanel('especies')" class="menu-item" id="menu-especies">
+                    <i class="fa-solid fa-tags"></i> Espécies
+                </a>
+                <a href="#" onclick="showPanel('racas')" class="menu-item" id="menu-racas">
+                    <i class="fa-solid fa-dna"></i> Raças
+                </a>
+                <a href="#" onclick="showPanel('denuncias')" class="menu-item" id="menu-denuncias">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Denúncias
+                    <span class="menu-badge" id="denuncias-pending-badge" style="display:none">0</span>
+                </a>
+                <a href="#" onclick="showPanel('usuarios')" class="menu-item" id="menu-usuarios">
+                    <i class="fa-solid fa-users"></i> Usuários
+                </a>
+                <div class="sidebar-divider"></div>
+                <a href="../index.html" class="menu-item" target="_blank">
+                    <i class="fa-solid fa-globe"></i> Ver Site
+                </a>
+                <a href="#" onclick="logout()" class="menu-item menu-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sair
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Topbar -->
+            <div class="topbar">
+                <div class="topbar-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h3 id="page-title">Dashboard</h3>
+                </div>
+                <div class="topbar-right">
+                    <span class="topbar-user" id="topbar-user">Administrador</span>
+                    <button class="btn btn-sm btn-outline" onclick="logout()">
+                        <i class="fa-solid fa-right-from-bracket"></i> Sair
+                    </button>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════
+                 PANEL: DASHBOARD
+             ═══════════════════════════════════════════ -->
+            <div class="panel active" id="panel-dashboard">
+                <!-- KPI Cards -->
+                <div class="kpi-grid" id="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(240,140,103,0.12);color:#f08c67"><i class="fa-solid fa-paw"></i></div>
+                        <div class="kpi-body">
+                            <span class="kpi-label">Total de Animais</span>
+                            <span class="kpi-value" id="kpi-total">—</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(34,197,94,0.12);color:#22c55e"><i class="fa-solid fa-heart"></i></div>
+                        <div class="kpi-body">
+                            <span class="kpi-label">Disponíveis</span>
+                            <span class="kpi-value" id="kpi-disponiveis">—</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b"><i class="fa-solid fa-clock"></i></div>
+                        <div class="kpi-body">
+                            <span class="kpi-label">Em Processo</span>
+                            <span class="kpi-value" id="kpi-processo">—</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(99,102,241,0.12);color:#6366f1"><i class="fa-solid fa-house-heart"></i></div>
+                        <div class="kpi-body">
+                            <span class="kpi-label">Adotados</span>
+                            <span class="kpi-value" id="kpi-adotados">—</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h4 class="chart-title"><i class="fa-solid fa-chart-pie"></i> Animais por Espécie</h4>
+                        <div class="chart-wrap">
+                            <canvas id="chart-especie"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h4 class="chart-title"><i class="fa-solid fa-chart-bar"></i> Animais por Status</h4>
+                        <div class="chart-wrap">
+                            <canvas id="chart-status"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card chart-wide">
+                        <h4 class="chart-title"><i class="fa-solid fa-chart-line"></i> Cadastros Mensais</h4>
+                        <div class="chart-wrap chart-wrap-line">
+                            <canvas id="chart-monthly"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════
+                 PANEL: ANIMAIS
+             ═══════════════════════════════════════════ -->
+            <div class="panel" id="panel-animals">
+                <!-- Form -->
+                <div class="form-crud" id="animal-form-card">
+                    <div class="form-crud-header">
+                        <h4 id="animal-form-title"><i class="fa-solid fa-plus"></i> Novo Animal</h4>
+                        <button class="btn-icon-close" id="animal-form-close" onclick="resetAnimalForm()" style="display:none" title="Fechar">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    <form id="animal-form" enctype="multipart/form-data">
+                        <input type="hidden" id="animal-id">
+                        <div class="form-grid-3">
+                            <div class="form-group">
+                                <label for="a-nome">Nome *</label>
+                                <input type="text" id="a-nome" placeholder="Nome do animal" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="a-especie">Espécie *</label>
+                                <select id="a-especie" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="a-raca">Raça *</label>
+                                <select id="a-raca" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="a-sexo">Sexo *</label>
+                                <select id="a-sexo" required>
+                                    <option value="">Selecionar</option>
+                                    <option value="Macho">Macho</option>
+                                    <option value="Fêmea">Fêmea</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="a-porte">Porte *</label>
+                                <select id="a-porte" required>
+                                    <option value="">Selecionar</option>
+                                    <option value="Pequeno">Pequeno</option>
+                                    <option value="Médio">Médio</option>
+                                    <option value="Grande">Grande</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="a-idade">Idade (anos) *</label>
+                                <input type="number" id="a-idade" min="0" max="30" placeholder="Ex: 2" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="a-status">Status *</label>
+                                <select id="a-status" required>
+                                    <option value="Disponível">Disponível</option>
+                                    <option value="Em Processo">Em Processo</option>
+                                    <option value="Adotado">Adotado</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="a-foto">Foto</label>
+                                <input type="file" id="a-foto" accept="image/*">
+                            </div>
+                            <div class="form-group form-span-3">
+                                <label for="a-descricao">Descrição</label>
+                                <textarea id="a-descricao" rows="2" placeholder="Descrição do animal..."></textarea>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" id="animal-submit-btn">
+                                <i class="fa-solid fa-check"></i> Salvar
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="resetAnimalForm()">
+                                <i class="fa-solid fa-xmark"></i> Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Search + Table -->
+                <div class="table-card">
+                    <div class="table-card-header">
+                        <h4><i class="fa-solid fa-list"></i> Lista de Animais</h4>
+                        <input type="text" class="table-search" id="search-animals" placeholder="Buscar...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="animals-table">
+                            <thead>
+                                <tr>
+                                    <th>Foto</th>
+                                    <th>Nome</th>
+                                    <th>Espécie</th>
+                                    <th>Raça</th>
+                                    <th>Sexo</th>
+                                    <th>Porte</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="animals-tbody">
+                                <tr><td colspan="8" class="loading-cell"><div class="spinner" style="width:28px;height:28px;"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════
+                 PANEL: ESPÉCIES
+             ═══════════════════════════════════════════ -->
+            <div class="panel" id="panel-especies">
+                <div class="form-crud">
+                    <div class="form-crud-header">
+                        <h4 id="especie-form-title"><i class="fa-solid fa-plus"></i> Nova Espécie</h4>
+                    </div>
+                    <form id="especie-form">
+                        <input type="hidden" id="especie-id">
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="e-nome">Nome *</label>
+                                <input type="text" id="e-nome" placeholder="Ex: Cachorro" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="e-descricao">Descrição</label>
+                                <input type="text" id="e-descricao" placeholder="Descrição (opcional)">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-check"></i> Salvar
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="resetEspecieForm()">
+                                <i class="fa-solid fa-xmark"></i> Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-card">
+                    <div class="table-card-header">
+                        <h4><i class="fa-solid fa-list"></i> Espécies Cadastradas</h4>
+                        <input type="text" class="table-search" id="search-especies" placeholder="Buscar...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>ID</th><th>Nome</th><th>Descrição</th><th>Cadastro</th><th>Ações</th></tr>
+                            </thead>
+                            <tbody id="especies-tbody">
+                                <tr><td colspan="5" class="loading-cell"><div class="spinner" style="width:28px;height:28px;"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════
+                 PANEL: RAÇAS
+             ═══════════════════════════════════════════ -->
+            <div class="panel" id="panel-racas">
+                <div class="form-crud">
+                    <div class="form-crud-header">
+                        <h4 id="raca-form-title"><i class="fa-solid fa-plus"></i> Nova Raça</h4>
+                    </div>
+                    <form id="raca-form">
+                        <input type="hidden" id="raca-id">
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="r-nome">Nome *</label>
+                                <input type="text" id="r-nome" placeholder="Ex: Labrador" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="r-especie">Espécie *</label>
+                                <select id="r-especie" required>
+                                    <option value="">Selecionar Espécie</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-span-2">
+                                <label for="r-descricao">Descrição</label>
+                                <input type="text" id="r-descricao" placeholder="Descrição (opcional)">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-check"></i> Salvar
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="resetRacaForm()">
+                                <i class="fa-solid fa-xmark"></i> Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-card">
+                    <div class="table-card-header">
+                        <h4><i class="fa-solid fa-list"></i> Raças Cadastradas</h4>
+                        <input type="text" class="table-search" id="search-racas" placeholder="Buscar...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>ID</th><th>Nome</th><th>Espécie</th><th>Descrição</th><th>Ações</th></tr>
+                            </thead>
+                            <tbody id="racas-tbody">
+                                <tr><td colspan="5" class="loading-cell"><div class="spinner" style="width:28px;height:28px;"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════
+                 PANEL: DENÚNCIAS
+             ═══════════════════════════════════════════ -->
+            <div class="panel" id="panel-denuncias">
+                <div class="kpi-grid" id="denuncias-kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(240,140,103,0.12);color:#f08c67"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="kpi-body">
+                            <span class="kpi-label">Total de Denúncias</span>
+                            <span class="kpi-value" id="den-kpi-total">0</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(239,68,68,0.12);color:#ef4444"><i class="fa-solid fa-bell"></i></div>
+                        <div class="kpi-body">
+                            <span class="kpi-label">Pendentes</span>
+                            <span class="kpi-value" id="den-kpi-pendentes">0</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <div class="kpi-body">
+                            <span class="kpi-label">Em Análise / Atendimento</span>
+                            <span class="kpi-value" id="den-kpi-andamento">0</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon" style="background:rgba(34,197,94,0.12);color:#22c55e"><i class="fa-solid fa-circle-check"></i></div>
+                        <div class="kpi-body">
+                            <span class="kpi-label">Resolvidas</span>
+                            <span class="kpi-value" id="den-kpi-resolvidas">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-card-header table-card-header-wrap">
+                        <h4><i class="fa-solid fa-shield-dog"></i> Denúncias de Maus-Tratos Recebidas</h4>
+                        <div class="table-filters-inline">
+                            <select class="table-filter-select" id="filter-denuncias-status">
+                                <option value="">Todos os Status</option>
+                                <option value="Pendente">Pendente</option>
+                                <option value="Em Análise">Em Análise</option>
+                                <option value="Em Atendimento">Em Atendimento</option>
+                                <option value="Resolvida">Resolvida</option>
+                                <option value="Arquivada">Arquivada</option>
+                            </select>
+                            <input type="text" class="table-search" id="search-denuncias" placeholder="Buscar por local, tipo...">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Protocolo</th>
+                                    <th>Data</th>
+                                    <th>Tipo</th>
+                                    <th>Animal</th>
+                                    <th>Local</th>
+                                    <th>Denunciante</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="denuncias-tbody">
+                                <tr><td colspan="8" class="loading-cell"><div class="spinner" style="width:28px;height:28px;"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════
+                 PANEL: USUÁRIOS
+             ═══════════════════════════════════════════ -->
+            <div class="panel" id="panel-usuarios">
+                <div class="form-crud">
+                    <div class="form-crud-header">
+                        <h4 id="usuario-form-title"><i class="fa-solid fa-plus"></i> Novo Usuário</h4>
+                    </div>
+                    <form id="usuario-form">
+                        <input type="hidden" id="usuario-id">
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="u-nome">Nome Completo *</label>
+                                <input type="text" id="u-nome" placeholder="Nome do usuário" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="u-usuario">Login (usuário) *</label>
+                                <input type="text" id="u-usuario" placeholder="Ex: joao.silva" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="u-senha">Senha <span id="senha-hint" style="color:var(--text-muted);font-weight:400;font-size:0.8rem">(deixe vazio para manter)</span></label>
+                                <input type="password" id="u-senha" placeholder="Nova senha">
+                            </div>
+                            <div class="form-group">
+                                <label for="u-perfil">Perfil *</label>
+                                <select id="u-perfil" required>
+                                    <option value="Administrador">Administrador</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="u-status">Status *</label>
+                                <select id="u-status" required>
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Inativo">Inativo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-check"></i> Salvar
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="resetUsuarioForm()">
+                                <i class="fa-solid fa-xmark"></i> Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-card">
+                    <div class="table-card-header">
+                        <h4><i class="fa-solid fa-list"></i> Usuários Cadastrados</h4>
+                        <input type="text" class="table-search" id="search-usuarios" placeholder="Buscar...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Nome</th><th>Usuário</th><th>Perfil</th><th>Status</th><th>Cadastro</th><th>Ações</th></tr>
+                            </thead>
+                            <tbody id="usuarios-tbody">
+                                <tr><td colspan="6" class="loading-cell"><div class="spinner" style="width:28px;height:28px;"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Modal: Detalhes e Gestão da Denúncia -->
+    <div class="admin-modal-overlay" id="denuncia-modal">
+        <div class="admin-modal-box">
+            <div class="admin-modal-header">
+                <h4 id="denuncia-modal-title"><i class="fa-solid fa-triangle-exclamation"></i> Detalhes da Denúncia</h4>
+                <button type="button" class="btn-icon-close" onclick="closeDenunciaModal()" title="Fechar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="admin-modal-body" id="denuncia-modal-body">
+                <!-- Preenchido via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="../js/services/api.js"></script>
+    <script src="../js/services/authService.js"></script>
+    <script src="../js/services/dashboardService.js"></script>
+    <script src="../js/services/animalService.js"></script>
+    <script src="../js/services/especieService.js"></script>
+    <script src="../js/services/racaService.js"></script>
+    <script src="../js/services/usuarioService.js"></script>
+    <script src="../js/services/denunciaService.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

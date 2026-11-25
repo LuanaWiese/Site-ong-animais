@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo de Resgates – Adote um amigo para a vida!</title>
+    <meta name="description" content="Grupo de Resgates conecta animais resgatados a famílias amorosas e combate os maus-tratos. Conheça nossos pets disponíveis para adoção ou faça uma denúncia.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-label">
+                    <i class="fa-solid fa-paw"></i>
+                    Grupo de Resgates
+                </div>
+                <h1>Todo animal merece um lar com <span class="highlight">amor</span></h1>
+                <p>Conectamos animais resgatados a famílias amorosas. Encontre seu novo melhor amigo e transforme a vida de um bichinho.</p>
+                <div class="hero-buttons">
+                    <a href="adocao.html" class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-heart"></i> Adotar Agora
+                    </a>
+                    <a href="denuncias.html" class="btn btn-outline btn-lg">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Denunciar Maus-Tratos
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-total">0</span>
+                        <span class="stat-label">Animais</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-disponiveis">0</span>
+                        <span class="stat-label">Disponíveis</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-adotados">0</span>
+                        <span class="stat-label">Adotados</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&q=80" alt="Cão feliz com família" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <div class="icon"><i class="fa-solid fa-paw"></i></div>
+                    <span class="number" id="card-total">—</span>
+                    <span class="label">Total de Animais</span>
+                </div>
+                <div class="stats-card">
+                    <div class="icon"><i class="fa-solid fa-heart"></i></div>
+                    <span class="number" id="card-disponiveis">—</span>
+                    <span class="label">Disponíveis</span>
+                </div>
+                <div class="stats-card">
+                    <div class="icon"><i class="fa-solid fa-clock"></i></div>
+                    <span class="number" id="card-processo">—</span>
+                    <span class="label">Em Processo</span>
+                </div>
+                <div class="stats-card">
+                    <div class="icon"><i class="fa-solid fa-house-heart"></i></div>
+                    <span class="number" id="card-adotados">—</span>
+                    <span class="label">Adotados</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Animals -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Adoção</span>
+                <h2>Animais em Destaque</h2>
+                <p>Conheça alguns dos nossos peludos que estão esperando por uma família!</p>
+            </div>
+            <div class="animals-grid" id="featured-animals">
+                <div class="loading-state"><div class="spinner"></div></div>
+            </div>
+            <div style="text-align:center; margin-top:40px;">
+                <a href="adocao.html" class="btn btn-primary btn-lg">
+                    Ver Todos os Animais <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Adopt Section -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Como Adotar</span>
+                <h2>Processo Simples e Transparente</h2>
+                <p>Adotar um animal é um ato de amor. Siga estes passos para encontrar seu novo companheiro.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <i class="fa-solid fa-magnifying-glass step-icon"></i>
+                    <h4>Escolha um Animal</h4>
+                    <p>Navegue pelo nosso catálogo e encontre o animal que combina com você.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <i class="fa-solid fa-phone step-icon"></i>
+                    <h4>Entre em Contato</h4>
+                    <p>Fale conosco pelo formulário de contato ou WhatsApp para agendar uma visita.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <i class="fa-solid fa-file-signature step-icon"></i>
+                    <h4>Assine o Termo</h4>
+                    <p>Após aprovação, assine o termo de responsabilidade de adoção.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">04</div>
+                    <i class="fa-solid fa-house-heart step-icon"></i>
+                    <h4>Leve para Casa!</h4>
+                    <p>Seu novo companheiro vai para seu novo lar cheio de amor e cuidado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <i class="fa-solid fa-paw cta-icon"></i>
+                <h2>Ajude a transformar uma vida</h2>
+                <p>Cada adoção faz a diferença. Se não puder adotar, considere apoiar nossa causa!</p>
+                <div class="cta-buttons">
+                    <a href="adocao.html" class="btn btn-primary btn-lg">Adotar Agora</a>
+                    <a href="denuncias.html" class="btn btn-outline btn-lg" style="border-color:white;color:white;">Denunciar Maus-Tratos</a>
+                    <a href="contato.html" class="btn btn-outline btn-lg" style="border-color:white;color:white;">Entrar em Contato</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="js/services/api.js"></script>
+    <script src="js/services/animalService.js"></script>
+    <script src="js/services/dashboardService.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/index.js?v=20260610"></script>
+</body>
+</html>

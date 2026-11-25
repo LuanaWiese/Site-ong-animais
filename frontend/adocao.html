@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animais para Adoção – Grupo de Resgates</title>
+    <meta name="description" content="Encontre seu novo companheiro. Filtre e busque animais disponíveis para adoção no Grupo de Resgates.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/adocao.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="section-label">Catálogo</span>
+            <h1>Animais para Adoção</h1>
+            <p>Encontre seu novo melhor amigo! Todos os nossos animais são vacinados, castrados e prontos para um novo lar.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <!-- Filters -->
+            <div class="filters-bar" id="filters-bar">
+                <div class="filter-group" style="flex:2;">
+                    <i class="fa-solid fa-magnifying-glass" style="color:var(--text-muted)"></i>
+                    <input type="text" id="search-input" placeholder="Buscar por nome...">
+                </div>
+                <div class="filter-group">
+                    <select id="filter-especie">
+                        <option value="">Todas as Espécies</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="filter-porte">
+                        <option value="">Todos os Portes</option>
+                        <option value="Pequeno">Pequeno</option>
+                        <option value="Médio">Médio</option>
+                        <option value="Grande">Grande</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="filter-sexo">
+                        <option value="">Todos os Sexos</option>
+                        <option value="Macho">Macho</option>
+                        <option value="Fêmea">Fêmea</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="filter-status">
+                        <option value="Disponível">Disponíveis</option>
+                        <option value="">Todos</option>
+                        <option value="Em Processo">Em Processo</option>
+                        <option value="Adotado">Adotados</option>
+                    </select>
+                </div>
+                <button class="btn btn-outline btn-sm" id="btn-clear-filters">
+                    <i class="fa-solid fa-xmark"></i> Limpar
+                </button>
+            </div>
+
+            <!-- Results count -->
+            <div class="results-bar">
+                <span id="results-count">Carregando...</span>
+            </div>
+
+            <!-- Animals grid -->
+            <div class="animals-grid" id="animals-grid">
+                <div class="loading-state" style="grid-column:1/-1">
+                    <div class="spinner"></div>
+                    <p style="margin-top:16px;color:var(--text-muted)">Carregando animais...</p>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </section>
+
+    <!-- Animal Detail Modal -->
+    <div class="modal-overlay" id="animal-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-animal-name">Detalhes do Animal</h3>
+                <button class="modal-close" onclick="closeAnimalModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-animal-body">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <div id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="js/services/api.js"></script>
+    <script src="js/services/animalService.js"></script>
+    <script src="js/services/especieService.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/adocao.js?v=20260610"></script>
+</body>
+</html>

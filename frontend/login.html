@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Painel Administrativo | Grupo de Resgates</title>
+    <meta name="description" content="Acesse o painel administrativo do Grupo de Resgates.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-body">
+
+    <div class="login-container">
+        <!-- Left Panel -->
+        <div class="login-left">
+            <div class="login-left-content">
+                <div class="login-brand">
+                    <i class="fa-solid fa-paw"></i>
+                    <span>Grupo de Resgates</span>
+                </div>
+                <h1>Painel Administrativo</h1>
+                <p>Gerencie animais, espécies, raças e usuários em um só lugar.</p>
+                <div class="login-features">
+                    <div class="login-feat"><i class="fa-solid fa-chart-line"></i><span>Dashboard com estatísticas em tempo real</span></div>
+                    <div class="login-feat"><i class="fa-solid fa-paw"></i><span>Gestão completa de animais e adoções</span></div>
+                    <div class="login-feat"><i class="fa-solid fa-users"></i><span>Controle de acesso por perfil</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel (Form) -->
+        <div class="login-right">
+            <div class="login-form-container">
+                <div class="login-header">
+                    <div class="login-avatar">
+                        <i class="fa-solid fa-user-lock"></i>
+                    </div>
+                    <h2>Entrar</h2>
+                    <p>Informe suas credenciais para acessar o painel.</p>
+                </div>
+
+                <div class="login-error" id="login-error" style="display:none;">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span id="login-error-msg">Usuário ou senha inválidos.</span>
+                </div>
+
+                <form id="login-form" novalidate>
+                    <div class="form-group">
+                        <label for="login-usuario">Usuário</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="login-usuario" name="usuario"
+                                placeholder="Digite seu usuário" autocomplete="username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-senha">Senha</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="login-senha" name="senha"
+                                placeholder="Digite sua senha" autocomplete="current-password" required>
+                            <button type="button" class="toggle-pass" id="toggle-pass" tabindex="-1" aria-label="Mostrar senha">
+                                <i class="fa-solid fa-eye" id="toggle-pass-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-login-submit" id="login-btn">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Entrar
+                    </button>
+                </form>
+
+                <div class="login-footer-link">
+                    <a href="index.html">
+                        <i class="fa-solid fa-arrow-left"></i> Voltar ao site
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="js/services/api.js"></script>
+    <script src="js/services/authService.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

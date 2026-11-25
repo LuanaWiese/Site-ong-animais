@@ -1,0 +1,226 @@
+/* sobre.css - Sobre Nós page styles */
+
+/* Page Hero */
+.page-hero {
+    background: linear-gradient(135deg, #fff5ef 0%, #ffe8d6 100%);
+    padding: 80px 0 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.page-hero h1 {
+    margin: 16px 0 14px;
+}
+
+.page-hero p {
+    max-width: 560px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+}
+
+/* About Split */
+.about-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+}
+
+.about-image {
+    position: relative;
+}
+
+.about-image img {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.about-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: var(--primary);
+    color: white;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.about-badge .badge-num {
+    display: block;
+    font-family: 'Sora', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.about-badge .badge-text {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.about-text .section-label {
+    margin-bottom: 12px;
+}
+
+.about-text h2 {
+    margin-bottom: 20px;
+}
+
+.about-highlights {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--bg-alt);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.highlight-item > i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    width: 40px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.highlight-item strong {
+    display: block;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.highlight-item span {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+/* MVV Grid */
+.mvv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.mvv-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.mvv-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.mvv-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.mvv-card h3 {
+    margin-bottom: 14px;
+}
+
+.values-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.values-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.values-list li i {
+    color: var(--primary);
+    font-size: 0.75rem;
+}
+
+/* Team */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.team-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 32px 20px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.team-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.team-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 2rem;
+    color: white;
+}
+
+.team-card h4 {
+    margin-bottom: 4px;
+}
+
+.team-role {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.team-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+    .about-split { grid-template-columns: 1fr; }
+    .about-badge { bottom: 16px; right: 16px; }
+    .mvv-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+    .team-grid { grid-template-columns: 1fr; }
+}
